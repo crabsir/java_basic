@@ -4,7 +4,7 @@ import java.util.logging.*;
 
 public class Spy implements MailService {
 
-    public static final String AUSTIN_POWERS = "Austin Powers";
+    private static final String AUSTIN_POWERS = "Austin Powers";
 
     private final Logger logger;
 

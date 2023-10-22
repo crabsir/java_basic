@@ -1,7 +1,5 @@
 package mail;
 
-import java.util.logging.*;
-
 public class Send {
 
     public static final String AUSTIN_POWERS = "Austin Powers";

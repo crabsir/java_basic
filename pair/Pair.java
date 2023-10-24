@@ -1,7 +1,5 @@
 package pair;
 
-import java.util.Objects;
-
 public class Pair<T, U> {
 
     private final T first;
@@ -30,15 +28,19 @@ public class Pair<T, U> {
         if (this == obj) {
             return true;
         }
+        if (!(obj instanceof Pair)) {
+            return false;
+        }
 
-        return obj instanceof Pair<?, ?> other
-                && Objects.equals(first, other.first)
-                && Objects.equals(second, other.second);
+        Pair<?, ?> other = (Pair<?, ?>) obj;
+
+        return java.util.Objects.equals(first, other.first)
+                && java.util.Objects.equals(second, other.second);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(first) + Objects.hashCode(second);
+        return first.hashCode() + second.hashCode();
     }
 
 }

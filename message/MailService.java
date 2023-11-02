@@ -2,10 +2,17 @@ package message;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MailService<T> implements Consumer<Sendable<T>> {
 
-    private Map<String, List<T>> mailBox = new HashMap<>();
+    private final Map<String, List<T>> mailBox = new HashMap<>() {
+        @Override
+        public List<T> get(Object key) {
+            return super.get(key) == null ? Collections.emptyList() : super.get(key);
+        }
+    };
 
     public MailService() {}
 
@@ -13,7 +20,9 @@ public class MailService<T> implements Consumer<Sendable<T>> {
         return mailBox;
     }
 
+    @Override
     public void accept(Sendable<T> t) {
-        mailBox.put(t.getTo(), Arrays.asList(t.getContent()));
+        mailBox.merge(t.getTo(), Arrays.asList(t.getContent()),
+                (x, y) -> Stream.concat(x.stream(), y.stream()).collect(Collectors.toList()));
     }
 }

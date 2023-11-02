@@ -7,10 +7,10 @@ import java.util.stream.Stream;
 
 public class MailService<T> implements Consumer<Sendable<T>> {
 
-    private final Map<String, List<T>> mailBox = new HashMap<>() {
+    private final Map<String, List<T>> mailBox = new HashMap<String, List<T>>() {
         @Override
         public List<T> get(Object key) {
-            return super.get(key) == null ? Collections.emptyList() : super.get(key);
+            return super.getOrDefault(key, Collections.emptyList());
         }
     };
 

@@ -1,11 +1,11 @@
 package message;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Consumer;
 
-public class MailService<T> {
+public class MailService<T> implements Consumer<Sendable<T>> {
 
-    private Map<String, List<T>> mailBox;
+    private Map<String, List<T>> mailBox = new HashMap<>();
 
     public MailService() {}
 
@@ -13,4 +13,7 @@ public class MailService<T> {
         return mailBox;
     }
 
+    public void accept(Sendable<T> t) {
+        mailBox.put(t.getTo(), Arrays.asList(t.getContent()));
+    }
 }

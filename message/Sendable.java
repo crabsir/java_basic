@@ -1,4 +1,4 @@
-package function;
+package message;
 
 public abstract class Sendable<T> {
 
